@@ -1,0 +1,60 @@
+---
+
+import Button from "../components/Button/Button.astro";
+
+---
+
+<section class="p-10 md:px-20 bg-[#FFF8E1]">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- Columna izquierda - Historia del restaurante -->
+      <div class="flex flex-col justify-center space-y-5">
+        <p class="mb-10 font-light  text-gray-600 text-1/2">Our story and services</p>
+        <h1 class="mb-5 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-black">
+            Our Culinary Journey <br>And Services
+        </h1>
+        <p class="text-gray-700 leading-relaxed">
+          We have been faithful to authentic Cuban cuisine. 
+          Our restaurant not only offers unforgettable flavors, but is also a living piece of Cuban history and culture. With recipes passed down through generations and an atmosphere that transports you to the vibrant Cuba of yesteryear, we invite you to live a unique culinary experience.
+        </p>
+        <Button name="Book now" />
+      </div>
+
+      <!-- Columna derecha - Servicios -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- Domicilio -->
+        <div class="bg-[#d4b81f] p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+          
+          <h3 class="text-xl font-semibold text-white mb-2">Delivery</h3>
+          <p class="text-white">Enjoy our dishes in the comfort of your home.</p>
+        </div>
+
+        <!-- Combos de comida -->
+        <div class="bg-[#d4b81f] p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+        
+          <h3 class="text-xl font-semibold text-white mb-2">Food Combos</h3>
+          <p class="text-white">Try our delicious combinations at special prices.</p>
+        </div>
+
+        <!-- Regalos -->
+        <div class="bg-[#d4b81f] p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+         
+          <h3 class="text-xl font-semibold text-white mb-2">Gifts</h3>
+          <p class="text-white">Surprise your loved ones with our gift certificates.</p>
+        </div>
+
+        <!-- Comida de calidad -->
+        <div class="bg-[#d4b81f] p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+         
+          <h3 class="text-xl font-semibold text-white mb-2">Quality Food</h3>
+          <p class="text-white">Fresh ingredients and authentic recipes for a gourmet experience.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+</style>

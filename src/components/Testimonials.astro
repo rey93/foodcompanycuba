@@ -1,0 +1,184 @@
+---
+// testimonial.astro
+
+import { Image } from 'astro:assets';
+import chef from '../assets/chef.jpg';
+
+import Maria from '../assets/Maria.png';
+import Carlos from '../assets/Carlos.png';
+import Elena from '../assets/Elena.png';
+import Javier from '../assets/Javier.png';
+
+const testimonials = [
+  {
+    id: 1,
+    name: "María González",
+    text: "The food reminded me of my grandmother in Havana! The ropa vieja and moros y cristianas were perfectly seasoned.",
+    role: "Cliente frecuente",
+    avatar: Maria
+  },
+  {
+    id: 2,
+    name: "Carlos Rodríguez",
+    text: "El ambiente auténtico y la música cubana crearon una experiencia inolvidable. Los mojitos son los mejores que he probado fuera de Cuba.",
+    role: "Turista de Miami",
+    avatar: Carlos
+  },
+  {
+    id: 3,
+    name: "Elena Martínez",
+    text: "The ripe plantains and roasted suckling pig transported me straight to Santiago de Cuba. I will be back soon with my whole family!",
+    role: "Chef aficionada",
+    avatar: Elena
+  },
+  {
+    id: 4,
+    name: "Javier Pérez",
+    text: "El servicio fue excepcional y los postres, especialmente el flan de caramelo, fueron divinos. Una auténtica joya culinaria.",
+    role: "Crítico gastronómico",
+    avatar: Javier
+  }
+];
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-30 p-4 md:p-8 p-10 max-w-7xl mx-auto">
+  <div class="relative w-full h-[300px] md:h-[500px] rounded-xl overflow-hidden">
+    <Image 
+      src={chef} 
+      alt="Interior del Restaurante Cubano"     
+      class="object-center w-full h-full"
+    />
+  </div>
+
+  <div class="flex flex-col justify-start ">
+    <p class="mb-15 font-light  text-gray-600 text-1/2">Testimonials</p>
+    <h1 class="mb-15 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-black">
+        What Ours <span class="text-[#d6ba21]">Customers</span> <br>Say About Us
+       </h1>
+
+    <!-- Carrusel de Testimonios -->
+    <div class="relative ">
+      <div id="testimonial-carousel">
+        {testimonials.map((testimonial, index) => (
+          <div 
+            class={`testimonial-slide p-0 md:p-0 ${index === 0 ? 'block' : 'hidden'}`}
+            data-index={index}
+          >
+            <div class="space-y-4">
+              <p class="text-lg italic">"{testimonial.text}"</p>
+              <div class="flex items-center gap-3">
+                <Image 
+                  src={testimonial.avatar} 
+                  alt={`Avatar de ${testimonial.name}`} 
+                  width={40}
+                  height={40}
+                  class="w-10 h-10 rounded-full object-cover border-2 border-primary"
+                />
+                <div class="flex flex-col">
+                  <span class="font-semibold">{testimonial.name}</span>
+                  <span class="text-sm text-gray-500">{testimonial.role}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Controles del Carrusel -->
+      <div class="flex justify-between mt-4">
+        <button 
+          id="prev-button" 
+          class="rounded-full p-2 border border-gray-300 hover:bg-gray-100"
+          aria-label="Anterior testimonio"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+        
+        <div class="flex space-x-2 items-center">
+          {testimonials.map((_, index) => (
+            <span 
+              class={`block h-2 w-2 rounded-full ${index === 0 ? 'bg-primary' : 'bg-gray-200'}`}
+              data-indicator={index}
+            />
+          ))}
+        </div>
+        
+        <button 
+          id="next-button" 
+          class="rounded-full p-2 border border-gray-300 hover:bg-gray-100"
+          aria-label="Siguiente testimonio"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const indicators = document.querySelectorAll('[data-indicator]');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    function updateCarousel(newIndex: number) {
+      newIndex = (newIndex + totalSlides) % totalSlides; // Asegura que el índice esté dentro del rango
+      slides.forEach((slide, index) => {
+        if (index === newIndex) {
+          slide.classList.remove('hidden');
+          slide.classList.add('block');
+        } else {
+          slide.classList.add('hidden');
+          slide.classList.remove('block');
+        }
+      });
+      
+      indicators.forEach((indicator, index) => {
+        if (index === newIndex) {
+          indicator.classList.remove('bg-gray-200');
+          indicator.classList.add('bg-primary');
+        } else {
+          indicator.classList.remove('bg-primary');
+          indicator.classList.add('bg-gray-200');
+        }
+      });
+      
+      currentIndex = newIndex;
+    }
+
+    function goToPrevSlide() {
+      updateCarousel(currentIndex - 1);
+    }
+
+    function goToNextSlide() {
+      updateCarousel(currentIndex + 1);
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener('click', goToPrevSlide);
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener('click', goToNextSlide);
+    }
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        updateCarousel(index);
+      });
+    });
+  });
+</script>
+
+<style>
+  .bg-primary {
+    background-color: #3b82f6;
+  }
+</style>

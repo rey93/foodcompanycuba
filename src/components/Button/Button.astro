@@ -1,0 +1,28 @@
+---
+const { name, iconoFront, iconoBack } = Astro.props;
+---
+
+<a
+  href="#"
+  class="inline-flex items-center justify-center px-4 py-2.5 text-base font-medium text-center text-[#6b65a6] border border-[#d4b81f] rounded-lg focus:ring-4 hover:text-white hover:bg-[#d4b81f]"
+>
+  {iconoFront && <span class="icono-front" set:html={iconoFront}></span>}
+  {name}
+  {iconoBack && <span class="icono-back" set:html={iconoBack}></span>}
+</a>
+
+<style>
+  .icono-front,
+  .icono-back {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .icono-front {
+    margin-right: 8px;
+  }
+
+  .icono-back {
+    margin-left: 8px;
+  }
+</style>

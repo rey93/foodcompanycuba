@@ -1,0 +1,40 @@
+---
+// src/components/Header.astro
+
+import { Image } from 'astro:assets';
+import Navbar from '../components/Navbar.astro';
+import homeimage from '../assets/main_image.png';
+import Button from "../components/Button/Button.astro";
+const Dinner = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen-2 mr-2">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12zm0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" />
+</svg>
+`;
+---
+
+<header class="p-0">
+
+    <Navbar />
+    <div class="flex flex-col md:flex-row items-center justify-center gap-8 sm:p-0 xl:gap-16 p-10 mt-7">
+        <div class="flex flex-col justify-start items-start md:w-1/2">
+            <h1 class="mb-2 text-5xl tracking-tight font-bold text-gray-900 dark:text-black">
+                Cuban pizza, roast pork, rice conris, real <span class="text-[#d6ba21]">cuban flavor</span>
+            </h1>
+            <p class="mb-8 font-light sm:text-xl text-gray-600">
+                Enjoy authentic Cuban food at home. <span class="text-[#d6ba21]">Reserve</span> now and taste the difference."
+
+                Enjoy authentic Cuban food at <span class="text-[#d6ba21]">home</span>. 
+                Order now and notice the difference.
+                Our dishes are prepared with <span class="text-[#d6ba21]">love for you!</span>            </p>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+                <Button name="Order now" iconoFront={Dinner} />
+                
+            </div>
+        </div>
+        <Image class="w-full md:w-1/3 sm:1/2 " src={homeimage} alt="food" loading="eager"/>
+    </div>
+</header>
+
+<style>
+</style>
